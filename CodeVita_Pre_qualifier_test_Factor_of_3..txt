@@ -1,0 +1,43 @@
+# Factor of 3. (Codevita pre-qualifier question)
+
+from itertools import permutations
+
+list1 = []
+list2 = []
+
+c = 0
+flag = 0
+
+T = int(input("Enter the number of test cases:"))
+
+for i in range(0, T):
+    N = int(input("Enter the number of elements:"))
+    for j in range(0, N):
+        list1.append(int(input("Enter the number: ")))
+        
+    per = list(set(permutations(list1)))      # permutations are passes to the set so that the duplicates can be avoided.
+                                            # as (1,2,3,3) is same as (1,2,3,3) as 3 can be arranged in two ways.
+    for k in range(0, len(per)): 
+        
+        for l in range(0, len(per[k])-1):
+            sum1 = per[k][l] + per[k][l+1]
+            list2.append(sum1)
+            
+        for m in range(0, len(list2)):
+            if list2[m] % 3 != 0:
+                c += 1
+                
+        if c == len(list1)-1:
+            flag = 1
+        c = 0
+        list2 = []
+            
+    if flag == 1:
+        print("Yes")
+        
+    else:
+        print("No")
+    list1 = []
+    list2 = []
+    flag = 0
+    c = 0
